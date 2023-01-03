@@ -11,7 +11,7 @@ const Modal = ({ isOpened, open, data, active }) => {
 
   useEffect(() => {
     if (active) setTitle(posterTitle);
-  });
+  }, [active, posterTitle]);
 
   const addPoster = (title, desc, price) => {
     addDoc(dbInstance, {

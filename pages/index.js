@@ -1,11 +1,18 @@
 import Head from "next/head";
 import React, { useState } from "react";
+import { useRouter } from "next/router";
+// import video from "../public/video.mp4";
 
 export default function Home() {
+  const router = useRouter();
   const [headerss, setHeaders] = useState([]);
 
   const handleClick = (e) => {
     setHeaders([...headerss, { x: e.clientX, y: e.clientY }]);
+  };
+
+  const redirectRoute = () => {
+    router.push("/projects");
   };
 
   return (
@@ -17,7 +24,7 @@ export default function Home() {
       </Head>
 
       <section className="w-full h-screen absolute left-0 top-0  overflow-hidden flex justify-center items-center">
-        <div className="w-full h-full relative" onClick={handleClick}>
+        {/* <div className="w-full h-full relative" onClick={handleClick}>
           {headerss.map((header) =>
             React.createElement(
               "div",
@@ -29,7 +36,16 @@ export default function Home() {
               `(${header.x}, ${header.y})`
             )
           )}
-        </div>
+        </div> */}
+
+        <video
+          className="w-full h-full object-cover"
+          autoPlay
+          loop
+          onClick={redirectRoute}
+        >
+          <source src="./video.mp4" type="video/mp4" />
+        </video>
       </section>
     </div>
   );

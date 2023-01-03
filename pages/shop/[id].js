@@ -46,7 +46,9 @@ const ItemPage = () => {
               </p>
             </h1>
             <p className="text-2xl mt-2 w-1/2">{desc}</p>
-            <button>Pay ${price}</button>
+            <button className="w-full py-2 bg-blue-600 text-white">
+              Pay ${price}
+            </button>
           </div>
           <div className="mt-32"></div>
           <div className="w-full">
