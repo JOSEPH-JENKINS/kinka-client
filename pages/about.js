@@ -11,7 +11,7 @@ const About = () => {
       </Head>
 
       <section className="w-full px-4 absolute bottom-0 pb-2">
-        <p className="text-2xl">
+        <p className="text-base md:text-2xl">
           Kinka is a creative developer designing daily, exploring old and new
           art experiences. In the heart of Malaga, filled with vibrant cultures
           and the joyful spirit from the locals, creativity is never lacking. My
