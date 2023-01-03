@@ -6,6 +6,8 @@ import { database } from "../../utils/firebaseConfig";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { motion as m } from "framer-motion";
+import { postRequest } from "../../utils/postRequest";
+import { getStripe } from "../../utils/getStripe";
 
 const ItemPage = () => {
   const router = useRouter();
@@ -13,6 +15,29 @@ const ItemPage = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState("");
+
+  const handleStripe = async (e) => {
+    e.preventDefault();
+    const response = await postRequest("/api/checkout_sessions", {
+      item: {
+        title: title,
+        desc: desc,
+        price: price,
+        quantity: 1,
+      },
+    });
+
+    if (response.statusCode === 500) {
+      console.error(response.message);
+      return;
+    }
+
+    const stripe = await getStripe();
+    const { error } = await stripe.redirectToCheckout({
+      sessionId: response.id,
+    });
+    console.warn(error.message);
+  };
 
   useEffect(() => {
     const docRef = doc(database, "products", `${id}`);
@@ -52,7 +77,10 @@ const ItemPage = () => {
               </p>
             </h1>
             <p className="text-2xl mt-2 w-1/2">{desc}</p>
-            <button className="w-full py-2 bg-blue-600 text-white">
+            <button
+              className="w-full py-2 bg-blue-600 text-white"
+              onClick={handleStripe}
+            >
               Pay ${price}
             </button>
           </div>

@@ -21,11 +21,11 @@ export default async function handler(req, res) {
               currency: "usd",
               product_data: {
                 images: [item.image],
-                name: item.name,
+                name: item.title,
               },
               unit_amount: item.price * 100, // to convert into cents
             },
-            description: item.description,
+            description: item.desc,
             quantity: item.quantity,
           },
         ],

@@ -4,11 +4,11 @@ import { AnimatePresence } from "framer-motion";
 
 function MyApp({ Component, pageProps, router }) {
   return (
-    <Layout>
-      <AnimatePresence initial={false} mode={"wait"}>
+    <AnimatePresence initial={false} mode={"wait"}>
+      <Layout>
         <Component key={router.pathname} {...pageProps} />
-      </AnimatePresence>
-    </Layout>
+      </Layout>
+    </AnimatePresence>
   );
 }
 
