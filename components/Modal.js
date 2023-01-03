@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { database } from "../utils/firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
-import { uuid } from "uuidv4";
+import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
 
-const Modal = ({ isOpened, open }) => {
+const Modal = ({ isOpened, open, data, active }) => {
   const [posterTitle, setTitle] = useState("");
   const [posterDesc, setDesc] = useState("");
   const [posterPrice, setPrice] = useState(0);
 
   const dbInstance = collection(database, "products");
+
+  useEffect(() => {
+    if (active) setTitle(posterTitle);
+  });
 
   const addPoster = (title, desc, price) => {
     addDoc(dbInstance, {
@@ -25,6 +28,15 @@ const Modal = ({ isOpened, open }) => {
     if (addPoster(posterTitle, posterDesc, posterPrice)) {
       open(!isOpened);
     }
+  };
+
+  const editPoster = (e) => {
+    e.preventDefault();
+    updateDoc(doc(database, "products", `${active[0].id}`), {
+      title: posterTitle,
+      desc: posterDesc,
+      price: posterPrice,
+    });
   };
 
   return (
@@ -47,42 +59,84 @@ const Modal = ({ isOpened, open }) => {
                 </div>
                 <div className="w-full">
                   <div className="w-full border-b border-[#333] mb-8 overflow-hidden">
-                    <input
-                      className="appearance-none outline-none bg-transparent text-2xl w-full"
-                      placeholder="Title"
-                      onChange={(e) => setTitle(e.target.value)}
-                      required
-                    />
+                    {active ? (
+                      <input
+                        className="appearance-none outline-none bg-transparent text-2xl w-full"
+                        placeholder="Title"
+                        defaultValue={active[0].title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        required
+                      />
+                    ) : (
+                      <input
+                        className="appearance-none outline-none bg-transparent text-2xl w-full"
+                        placeholder="Title"
+                        onChange={(e) => setTitle(e.target.value)}
+                        required
+                      />
+                    )}
                   </div>
                   <div className="w-full border-b border-[#333] mb-8 overflow-hidden">
-                    <textarea
-                      className="appearance-none outline-none resize-none bg-transparent text-2xl w-full"
-                      placeholder="Description"
-                      maxLength={250}
-                      onChange={(e) => setDesc(e.target.value)}
-                      required
-                    />
+                    {active ? (
+                      <textarea
+                        className="appearance-none outline-none resize-none bg-transparent text-2xl w-full"
+                        placeholder="Description"
+                        maxLength={250}
+                        defaultValue={active[0].desc}
+                        onChange={(e) => setDesc(e.target.value)}
+                        required
+                      />
+                    ) : (
+                      <textarea
+                        className="appearance-none outline-none resize-none bg-transparent text-2xl w-full"
+                        placeholder="Description"
+                        maxLength={250}
+                        onChange={(e) => setDesc(e.target.value)}
+                        required
+                      />
+                    )}
                   </div>
                   <div className="w-full border-b flex items-center border-[#333] mb-8 overflow-hidden">
                     <h1 className="text-2xl mr-4 text-[#333]">$</h1>
-                    <input
-                      className="appearance-none outline-none bg-transparent text-2xl w-full"
-                      placeholder=""
-                      type="number"
-                      onChange={(e) => setPrice(e.target.value)}
-                      required
-                    />
+                    {active ? (
+                      <input
+                        className="appearance-none outline-none bg-transparent text-2xl w-full"
+                        placeholder=""
+                        type="number"
+                        defaultValue={active[0].price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        required
+                      />
+                    ) : (
+                      <input
+                        className="appearance-none outline-none bg-transparent text-2xl w-full"
+                        placeholder=""
+                        type="number"
+                        onChange={(e) => setPrice(e.target.value)}
+                        required
+                      />
+                    )}
                   </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-gray-600 px-4 py-2 rounded-full hover:text-gray-600 hover:bg-white"
-                    onClick={savePoster}
-                  >
-                    <h1 className="text-xl">+ Add</h1>
-                  </button>
+                  {active ? (
+                    <button
+                      type="submit"
+                      className="w-full bg-gray-600 px-4 py-2 rounded-full hover:text-gray-600 hover:bg-white"
+                      onClick={editPoster}
+                    >
+                      <h1 className="text-xl">+ Edit</h1>
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className="w-full bg-gray-600 px-4 py-2 rounded-full hover:text-gray-600 hover:bg-white"
+                      onClick={savePoster}
+                    >
+                      <h1 className="text-xl">+ Add</h1>
+                    </button>
+                  )}
                 </div>
               </div>
-              <div className="w-1/2 bg-white"></div>
+              <div className="w-1/2"></div>
             </div>
           </div>
         </div>

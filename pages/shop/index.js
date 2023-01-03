@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Item from "../../components/Item";
-import { collection, getDocs, QuerySnapshot } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { database } from "../../utils/firebaseConfig";
 import { useEffect, useState } from "react";
 
@@ -36,17 +36,18 @@ const Shop = () => {
         </h1>
       </div>
       <section className="w-full px-4 flex flex-wrap gap-y-12 justify-between">
-        {data.map((poster) => {
-          return (
-            <Item
-              id={poster.id}
-              key={poster.id}
-              desc={poster.data.desc}
-              title={poster.data.title}
-              price={poster.data.price}
-            />
-          );
-        })}
+        {data &&
+          data.map((poster) => {
+            return (
+              <Item
+                id={poster.id}
+                key={poster.id}
+                desc={poster.data.desc}
+                title={poster.data.title}
+                price={poster.data.price}
+              />
+            );
+          })}
         <Item />
       </section>
     </div>

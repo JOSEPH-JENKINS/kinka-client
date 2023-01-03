@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { motion } from "framer-motion";
+import { collection, getDocs } from "firebase/firestore";
+import { database } from "../../utils/firebaseConfig";
 import { useEffect, useRef, useState } from "react";
 import Product from "../../components/Admin/Product";
 import Modal from "../../components/Modal";
@@ -7,11 +9,21 @@ import Modal from "../../components/Modal";
 const Admin = () => {
   const [width, setWidth] = useState(0);
   const [isOpened, setOpen] = useState(false);
+  const [activeData, setActiveData] = useState();
+  const [data, setData] = useState([]);
   const carousel = useRef();
 
   useEffect(() => {
     setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
-  });
+    getDocs(collection(database, "products")).then((querySnapshot) => {
+      let d = [];
+      querySnapshot.forEach((doc) => {
+        console.log(doc.data());
+        d.push({ id: doc.id, data: doc.data() });
+      });
+      setData(d);
+    });
+  }, []);
   return (
     <div>
       <Head>
@@ -27,7 +39,7 @@ const Admin = () => {
           <h1 className="text-5xl inline relative">
             Products
             <p className="text-sm font-light absolute top-0 right-0 translate-x-full">
-              (20)
+              ({data.length})
             </p>
           </h1>
           <button
@@ -46,21 +58,24 @@ const Admin = () => {
             dragConstraints={{ right: 0, left: -width }}
             className="inner-carousel flex"
           >
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
+            {data &&
+              data.map((poster) => {
+                return (
+                  <Product
+                    id={poster.id}
+                    key={poster.id}
+                    title={poster.data.title}
+                    price={poster.data.price}
+                    isOpened={isOpened}
+                    open={setOpen}
+                    setActive={setActiveData}
+                  />
+                );
+              })}
           </motion.div>
         </motion.div>
         <div className="w-full h-4"></div>
-        <Modal isOpened={isOpened} open={setOpen} />
+        <Modal isOpened={isOpened} open={setOpen} active={activeData} />
       </div>
       <div className="md:hidden h-full w-full absolute top-0 left-0 -z-10 flex justify-center items-center">
         <p className="text-xl text-center">
