@@ -20,6 +20,7 @@ const Product = ({ title, price, id, desc, isOpened, open, setActive }) => {
           src="/2.jpg"
           fill={true}
           className="w-full h-full object-cover"
+          alt="hey"
         />
         <div className="w-full h-full absolute top-0 left-0 bg-grad translate-y-full group-hover:translate-y-0 transition-all">
           <div className="w-full h-full relative">

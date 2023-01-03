@@ -15,6 +15,7 @@ const Projects = () => {
             src="/2.jpg"
             fill={true}
             className="w-full h-full object-cover"
+            alt="heyy"
           />
         </div>
       </section>

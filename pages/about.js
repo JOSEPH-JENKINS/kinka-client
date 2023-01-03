@@ -10,7 +10,7 @@ const About = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <section className="w-full px-4 absolute bottom-0  pb-2">
+      <section className="w-full px-4 absolute bottom-0 pb-2">
         <p className="text-2xl">
           Kinka is a creative developer designing daily, exploring old and new
           art experiences. In the heart of Malaga, filled with vibrant cultures
@@ -24,17 +24,8 @@ const About = () => {
           significant attention across the digital design industry.
         </p>
         <section className="w-full mt-4 pb-2 flex">
-          <Link href={""}>
+          <Link href="https://www.instagram.com/kinka.sz">
             <h1 className="text-base uppercase">Instagram</h1>
-          </Link>
-          <Link href={""} className="ml-4">
-            <h1 className="text-base uppercase">Facebook</h1>
-          </Link>
-          <Link href={""} className="ml-4">
-            <h1 className="text-base uppercase">Twitter</h1>
-          </Link>
-          <Link href={""} className="ml-4">
-            <h1 className="text-base uppercase">Dribbble</h1>
           </Link>
         </section>
       </section>

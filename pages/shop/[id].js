@@ -26,7 +26,7 @@ const ItemPage = () => {
         console.log("h");
       }
     });
-  }, []);
+  }, [id]);
 
   return (
     <div>

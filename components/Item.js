@@ -10,6 +10,7 @@ const Item = ({ id, title, price }) => {
             src="/2.jpg"
             fill={true}
             className="w-full h-full object-cover"
+            alt="hey"
           />
         </div>
         <div className="flex justify-between w-full">
