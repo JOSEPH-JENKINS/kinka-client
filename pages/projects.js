@@ -16,7 +16,7 @@ const Projects = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <section className="w-full px-4 py-2 mt-12 flex gap-x-8 gap-y-24 flex-wrap">
-        <div className="w-48 h-48 bg-black relative hover:grayscale">
+        <div className="w-24 h-24 bg-black relative hover:grayscale">
           <Image
             src="/2.jpg"
             fill={true}
