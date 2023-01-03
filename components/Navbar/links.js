@@ -4,7 +4,7 @@ const NavLink = ({ href, title }) => {
   return (
     <div className="ml-4">
       <Link href={`${href}`}>
-        <h1 className="text-2xl uppercase">{title}</h1>
+        <h1 className="text-base md:text-2xl uppercase">{title}</h1>
       </Link>
     </div>
   );
