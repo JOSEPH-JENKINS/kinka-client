@@ -15,6 +15,7 @@ const ItemPage = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
 
   const handleStripe = async (e) => {
     e.preventDefault();
@@ -23,6 +24,7 @@ const ItemPage = () => {
         title: title,
         desc: desc,
         price: price,
+        image: image,
         quantity: 1,
       },
     });
@@ -48,11 +50,14 @@ const ItemPage = () => {
         setTitle(data.title);
         setDesc(data.desc);
         setPrice(data.price);
+        setImage(data.image);
       } else {
         console.log("h");
       }
     });
   }, [id]);
+
+  const stripe = loadStripe(publishableKey);
 
   return (
     <m.div
