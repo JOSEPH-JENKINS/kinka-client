@@ -51,10 +51,10 @@ const Shop = () => {
                 desc={poster.data.desc}
                 title={poster.data.title}
                 price={poster.data.price}
+                image={poster.data.image}
               />
             );
           })}
-        <Item />
       </section>
     </m.div>
   );

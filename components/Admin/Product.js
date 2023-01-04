@@ -4,7 +4,16 @@ import { database } from "../../utils/firebaseConfig";
 import { doc, deleteDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 
-const Product = ({ title, price, id, desc, isOpened, open, setActive }) => {
+const Product = ({
+  title,
+  price,
+  id,
+  image,
+  desc,
+  isOpened,
+  open,
+  setActive,
+}) => {
   const router = useRouter();
 
   const deleteProduct = () => {
@@ -17,7 +26,7 @@ const Product = ({ title, price, id, desc, isOpened, open, setActive }) => {
     <motion.div className="min-h-[20rem] min-w-[20rem] flex flex-col ml-4 relative cursor-pointer">
       <div className="w-full flex-1 bg-black relative overflow-hidden group">
         <Image
-          src="/2.jpg"
+          src={image}
           fill={true}
           className="w-full h-full object-cover"
           alt="hey"

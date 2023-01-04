@@ -1,13 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const Item = ({ id, title, price }) => {
+const Item = ({ id, title, price, image }) => {
   return (
     <div className="w-full md:w-[32.75%] mb-4">
       <Link href={`/shop/${id}`}>
         <div className="h-96 w-full bg-black mb-2 relative">
           <Image
-            src="/2.jpg"
+            src={image}
             fill={true}
             className="w-full h-full object-cover"
             alt="hey"

@@ -6,6 +6,7 @@ const Modal = ({ isOpened, open, data, active }) => {
   const [posterTitle, setTitle] = useState("");
   const [posterDesc, setDesc] = useState("");
   const [posterPrice, setPrice] = useState(0);
+  const [posterImage, setImage] = useState(0);
 
   const dbInstance = collection(database, "products");
 
@@ -13,11 +14,12 @@ const Modal = ({ isOpened, open, data, active }) => {
     if (active) setTitle(posterTitle);
   }, [active, posterTitle]);
 
-  const addPoster = (title, desc, price) => {
+  const addPoster = (title, desc, price, image) => {
     addDoc(dbInstance, {
       title: title,
       desc: desc,
       price: price,
+      image: image,
     }).then((res) => {
       return true;
     });
@@ -25,7 +27,7 @@ const Modal = ({ isOpened, open, data, active }) => {
 
   const savePoster = (e) => {
     e.preventDefault();
-    if (addPoster(posterTitle, posterDesc, posterPrice)) {
+    if (addPoster(posterTitle, posterDesc, posterPrice, posterImage)) {
       open(!isOpened);
     }
   };
@@ -36,6 +38,7 @@ const Modal = ({ isOpened, open, data, active }) => {
       title: posterTitle,
       desc: posterDesc,
       price: posterPrice,
+      image: posterImage,
     });
   };
 
@@ -72,6 +75,26 @@ const Modal = ({ isOpened, open, data, active }) => {
                         className="appearance-none outline-none bg-transparent text-2xl w-full"
                         placeholder="Title"
                         onChange={(e) => setTitle(e.target.value)}
+                        required
+                      />
+                    )}
+                  </div>
+                  <div className="w-full border-b border-[#333] mb-8 overflow-hidden">
+                    {active ? (
+                      <input
+                        className="appearance-none outline-none bg-transparent text-2xl w-full"
+                        placeholder="Image Link"
+                        defaultValue={active[0].image}
+                        type="url"
+                        onChange={(e) => setImage(e.target.value)}
+                        required
+                      />
+                    ) : (
+                      <input
+                        className="appearance-none outline-none bg-transparent text-2xl w-full"
+                        placeholder="Image Link"
+                        type="url"
+                        onChange={(e) => setImage(e.target.value)}
                         required
                       />
                     )}
