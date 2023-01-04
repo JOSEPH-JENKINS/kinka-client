@@ -7,6 +7,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "**.com",
       },
+      {
+        protocol: "https",
+        hostname: "**.co",
+      },
+      {
+        protocol: "https",
+        hostname: "**",
+      },
     ],
   },
 };
