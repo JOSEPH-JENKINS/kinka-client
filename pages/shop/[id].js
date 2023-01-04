@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import iag from "../../public/2.jpg";
+// import iag from "../../public/2.jpg";
 import { useRouter } from "next/router";
 import { database } from "../../utils/firebaseConfig";
 import { useEffect, useState } from "react";
@@ -90,7 +90,7 @@ const ItemPage = () => {
           <div className="mt-32"></div>
           <div className="w-full">
             <div className="w-1/2 ml-auto relative">
-              <Image src={iag} className="w-full object-cover" alt="hey" />
+              <Image src={image} className="w-full object-cover" alt="hey" />
             </div>
           </div>
         </div>
