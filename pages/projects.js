@@ -34,9 +34,13 @@ const Projects = () => {
         {data &&
           data.map((poster) => {
             return (
-              <div className="w-24 h-24 bg-black relative hover:grayscale">
+              <div
+                className="w-24 h-24 bg-black relative hover:grayscale"
+                key={poster.data.id}
+              >
                 <Image
                   src={poster.data.image}
+                  key={poster.data.id}
                   fill={true}
                   className="w-full h-full object-cover"
                   alt="heyy"
