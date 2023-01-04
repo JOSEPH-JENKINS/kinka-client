@@ -57,8 +57,6 @@ const ItemPage = () => {
     });
   }, [id]);
 
-  const stripe = loadStripe(publishableKey);
-
   return (
     <m.div
       initial={{ y: "100%" }}
